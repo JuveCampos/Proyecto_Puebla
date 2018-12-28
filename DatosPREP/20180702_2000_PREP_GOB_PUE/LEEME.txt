@@ -1,0 +1,170 @@
+Instructivo para lectura del archivo CSV:
+
+Glosario
+a) AEC: Acta de Escrutinio y Cómputo.
+b) Archivo CSV (comma separated values): es un tipo de archivo que permite el intercambio de información entre
+algunas aplicaciones de datos. En los archivos CSV la información se organiza de forma tabular. Cada línea del
+archivo es un registro y cada registro consiste en uno o más campos (columnas) separados por el carácter coma (",").
+c) CATD: Centro de Acopio y Transmisión de Datos.
+d) Función hash: Es una función computable mediante un algoritmo que tiene como entrada un conjunto de elementos,
+que suelen ser cadenas y los convierte en un rango de salidas finito, normalmente cadenas de longitud fija.
+e) PREP: Programa de Resultados Electorales Preliminares.
+f) SHA: Secure Hash Algoritm o Algoritm de Hash Seguro, es un valor o código de representación único que permite
+identificar a cada imagen del Acta PREP digitalizada. Dicho hash o código es obtenido a partir de algún algoritmo
+criptográfico denominado comúnmente función hash. Ejemplos de funciones hash son sha256 y md5. 
+
+Las Actas Esperadas: son las Actas de todas las casillas aprobadas por los Consejos Distritales Federales, por
+cada tipo de elección. Este conjunto de Actas PREP conforma el Catálogo de Actas Esperadas.
+
+Las Actas Capturadas: forman parte del universo de Actas Esperadas, refieren al número de Actas PREP registradas en 
+el Sistema Informático, al momento del corte de información. Éstas incluyen las Actas Contabilizadas y No Contabilizadas 
+y excluyen las Actas Fuera de Catálogo.
+
+Las Actas Contabilizadas, forman parte de las Actas Esperadas, son las actas de las que se tiene su correspondiente 
+Acta PREP y cumplen con los siguientes
+supuestos:
+- La suma de todos los votos asentados en el Acta no excede el número de ciudadanos en la Lista Nominal más los representantes de 
+los partidos y candidaturas independientes. En el caso de las casillas especiales, no excede el número máximo de boletas aprobado 
+más los representantes de los partidos y candidaturas independientes.
+- Al menos un campo, en los que se asientan votos, contiene datos y es legible.
+
+Las Actas No Contabilizadas son aquellas que presentan:
+- Alguna omisión, ilegibilidad o error en algunos de los campos de identificación del Acta PREP.
+- La suma de todos los votos asentados en el Acta excede el número de ciudadanos en la Lista Nominal más los representantes de los partidos y
+candidaturas independientes. En el caso de las
+casillas especiales, excede el número máximo de boletas aprobado más los representantes de los partidos y candidaturas independientes.
+- Todos los campos, en los que se asientan votos, no contienen dato alguno o son ilegibles.
+
+Las Actas Registradas es el número de Actas PREP que han sido registradas en el Sistema Informático al momento del corte 
+de información, sean Actas Contabilizadas, no contabilizadas e incluyendo las Actas Fueras de Catálogo.
+
+Las Actas Fuera de Catálogo es el número de Actas registradas en el Sistema Informático, al corte de información, no asociadas 
+a una casilla aprobada debido a un error u omisión en los datos de identificación.
+
+La Lista Nominal de Actas Contabilizadas es el agregado del número de ciudadanos con derecho a votar respecto a las casillas 
+que integran la lista nominal de las Actas PREP contabilizadas.
+
+El Total de votos Con Casillas Especiales es el agregado de la suma de los votos asentados en las Actas PREP Contabilizadas. 
+
+El total de votos se calcula mediante la suma que realiza automáticamente el sistema informático del PREP, tomando en consideración
+los votos de las actas de casillas especiales y del resto de los tipos de casillas.
+
+El Total de votos Sin Casillas Especiales es el agregado de la suma de los votos asentados en las Actas PREP Contabilizadas. 
+
+El total de votos se calcula mediante la suma que realiza automáticamente el sistema informático del PREP, sin tomar en consideración
+los votos de las actas de casillas especiales.
+
+Porcentaje Participación Ciudadana es el Porcentaje de ciudadanos que votaron con base en la Lista Nominal de las Actas PREP Contabilizadas.
+
+Porcentaje de Actas Capturadas es el Porcentaje de Actas PREP Capturadas al momento delcorte de información, calculado respecto del Total de
+Actas Esperadas.
+
+Porcentaje de Actas Contabilizadas es el Porcentaje de Actas PREP Contabilizadas al momento del corte de información, calculado respecto del Total
+de Actas Esperadas.
+
+Porcentaje de Actas con Inconsistencias es el Porcentaje de Actas PREP con Inconsistencias calculado respecto al Total de Actas Esperadas. 
+Para el cálculo se toman en consideración las Actas que presentan los siguientes supuestos:
+- Alguno de los campos, en los que se asientan votos, es ilegible o no contiene dato alguno.
+- La suma de todos los votos asentados en el Acta excede el número de ciudadanos en la Lista Nominal más los representantes de los partidos y 
+candidaturas independientes. En el caso de las casillas especiales, excede el número máximo de boletas aprobado más los representantes de los 
+partidos y candidaturas independientes.
+
+La variable CLAVE_CASILLA se conforma por la concatenación de las variables ID_ESTADO, SECCION,TIPO_CASILLA, ID_CASILLA y EXT_CONTIGUA.
+
+La variable CLAVE_ACTA se conforma por la agregación de las variables CLAVE_CASILLA y TIPO_ACTA.
+
+TOTAL_BOLETAS_SOBRANTES es total de las boletas no usadas y canceladas.
+
+El TOTAL_PERSONAS_VOTARON muestra el total de personas que votaron.
+
+El TOTAL_REP_PARTIDO_CI_VOTARON reporta el Total de Representantes de Partidos Políticos y de Candidaturas Independientes ante la Mesa Directiva de
+Casilla que votaron.
+
+El TOTAL_VOTOS_SACADOS es el número total de votos sacados de la urna.
+
+La SECCION corresponde a la clave de la sección de la casilla.
+
+El ID_CASILLA es el número de identificación de la casilla.
+
+La variable TIPO_CASILLA se refiere al tipo de casilla.
+
+EXT_CONTIGUA indica el número de casilla contigua a una extraordinaria.
+
+La variable UBICACIÓN_CASILLA indica la ubicación de la casilla, 1-urbana, 2-no urbana.
+
+El TIPO_ ACTA especifica el número de Acta impreso.
+
+La LISTA_NOMINAL reporta el número de ciudadanos con derecho a votar que integran la lista nominal de las Actas PREP contabilizadas. En el caso de las casillas
+especiales, el valor de la lista es cero debido a que en tales casillas no se cuenta con listas nominales.
+
+REPRESENTANTES_PP_CI refiere al número de Representantes de los Partidos Políticos y Candidaturas Independientes acreditados ante cada Mesa Directiva de
+Casilla se muestra en la variable.
+
+Las variables correspondientes a la votación de los partidos políticos reportan el número de votos por partido. Cabe mencionar que el orden de los 
+partidos se determina por el orden en el que se presentan en el Acta de Escrutinio y Cómputo.
+
+NO_REGISTRADOS reporta el número de votos emitidos para las candidaturas no registradas.
+
+La variable NULOS muestra el número de votos nulos.
+
+El TOTAL_VOTOS_ASENTADO se refiere al total de votos asentados en el Acta PREP.
+
+El TOTAL_VOTOS_CALCULADO es la suma de los votos asentados en las Actas PREP, para: los partidos políticos, candidaturas independientes, candidatura común 
+(en el caso de que la legislación lo contemple), coalición, votos nulos y candidaturas no registradas. El total de votos se calcula mediante la suma que realiza
+automáticamente el sistema informático del PREP.
+
+La variable OBSERVACIONES reporta los motivos porlos cuales un Acta no se contabiliza.
+
+FUERA DE CATÁLOGO. El Acta PREP contiene una omisión, ilegibilidad o error en alguno de los campos correspondientes a la identificación del Acta, por lo que no permite
+asociarla a una casilla aprobada.
+
+La variable CONTABILIZADA se refiere al estatus del Acta PREP relativo a su contabilización de acuerdo con lo establecido en el Anexo 13 del Reglamento de Elecciones.
+1-Contabilizada, 0-No contabilizada.
+
+Los MECANISMOS_TRASLADO indican los mecanismos de traslado aprobados por los Consejos Distritales del INE aplicables para cada uno de los paquetes electorales, 
+desde la casilla hasta el Consejo correspondiente. D-Dispositivos de Apoyo para el Traslado de Presidentes de Mesas Directivas de Casillas, F-Centros de Recepción y
+Traslado Fijos, I-Centros de Recepción y Traslado Itinerantes.
+
+La variable SHA es el identificador asociado al archivo del Acta digitalizada generado a través de la función criptográfica HASH denominada SHA256.
+
+La FECHA_HORA_ACOPIO identifica la fecha y hora de recepción del sobre PREP que contiene el Acta, en el CATD. La hora se expresa en formato de 24 horas y de
+acuerdo con el huso horario que corresponda a la entidad.
+
+La variable FECHA_HORA_CAPTURA identifica la fecha y hora de captura de los datos del Acta en el sistema informático. La hora siempre en formato de 24 horas y de
+acuerdo con el huso horario que corresponda a la entidad.
+
+La FECHA_HORA_VERIFICACIÓN identifica la fecha y hora de verificación del Acta en el sistema informático. La hora siempre en formato de 24 horas y de
+acuerdo con el huso horario que corresponda a la entidad. 
+
+ORIGEN es el identificador asociado al lugar de digitalización del Acta PREP. Móvil-Cuando la digitalización proviene de la casilla, Escáner-Cuando la digitalización 
+proviene del Centro de Acopio y Transmisión de Datos.
+
+TIPO_DOCUMENTO identifica el tipo de Acta PREP digitalizada. ACTA PREP-Primera copia del Acta de Escrutinio y cómputo, RPP-Copia del Acta de Escrutinio y Cómputo correspondiente
+a los partidos políticos, CC-Copia correspondiente al Consejo, PPC-Copia de los representantes de los partidos políticos obtenida del Consejo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
